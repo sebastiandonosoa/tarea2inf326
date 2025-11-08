@@ -1,7 +1,13 @@
 from litestar import Litestar, get, post
+from litestar.status_codes import HTTP_301_MOVED_PERMANENTLY
+from litestar.middleware.rate_limit import RateLimitConfig
 from base62 import encode, decode
 from typing import Dict
 import sqlite3
+
+
+# limite de 15 peticiones por minuto
+throttle_config = RateLimitConfig(rate_limit=("minute", 15))
 
 
 @post("/url_shortener")
@@ -43,7 +49,7 @@ async def create_shortURL(data: Dict[str, str]) -> str:
     return ("Guardado el url: " + url_short)
 
 
-@get("/url_shortener/{hash: str}")
+@get("/url_shortener/{hash: str}", status_code=HTTP_301_MOVED_PERMANENTLY, cache=86400)
 async def get_longURL(hash: str) -> str:
     conn = sqlite3.connect("URLShort2.db")
     cursor = conn.cursor()
@@ -61,4 +67,4 @@ async def get_longURL(hash: str) -> str:
     return "URL no encontrado"
 
 
-app = Litestar(route_handlers=[create_shortURL, get_longURL])
+app = Litestar(route_handlers=[create_shortURL, get_longURL], middleware=[throttle_config.middleware])
