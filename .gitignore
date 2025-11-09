@@ -1,7 +1,1 @@
-requirements.txt
-test.py
-url_shortener.py
-URLShort1.db
-/__pycache__
-/proto/analytics.db
-/proto/__pycache__
+__pycache__/
