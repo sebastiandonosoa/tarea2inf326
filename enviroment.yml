@@ -1,0 +1,14 @@
+name: tarea2inf326
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - litestar[standard]
+    - uvicorn
+    - jinja2
+    - pybase62
+    - grpcio
+    - grpcio-tools
