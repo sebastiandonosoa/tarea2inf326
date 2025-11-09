@@ -1,6 +1,0 @@
-litestar
-uvicorn
-jinja2
-base62
-grpcio
-grpcio-tools
