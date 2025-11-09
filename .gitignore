@@ -1,7 +1,1 @@
-/arquitectura1/requirements.txt
-/arquitectura1/test.py
-/arquitectura1/url_shortener.py
-/arquitectura1/URLShort1.db
-/__pycache__
-/arquitectura1/proto/analytics.db
-/arquitectura1/proto/__pycache__
+__pycache__/
