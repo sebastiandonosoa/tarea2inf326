@@ -1,7 +1,6 @@
-# tarea2inf326
-Repositorio de Tarea 2 del ramo Arquitectura De Software.
+# Arquitectura 1 (gRPC)
 
-Comenzamos ubicandonos en la carpeta "base":
+Comenzamos ubicandonos en la carpeta "base" para esta arquitectura:
 
 ```bash
 cd ".../tarea2inf326/arquitectura_1"
@@ -38,8 +37,10 @@ Tenemos que iniciar como módulo el gRPC_Server.py, el cual es el archivo encarg
 python -m proto.gRPC_Server
 ```
 
-Ahora desde otra terminal, tenemos que encargarnos de iniciar nuestra API (LiteStar), usando el siguiente comando:
+Desde otra terminal tenemos que encargarnos de iniciar nuestra API (LiteStar), usando el siguiente comando:
 
 ```bash
 litestar --app app:app run --host 0.0.0.0 --port <puerto_tuyo> --reload
 ```
+
+Ahora puedes ingresar a la interfaz del sistema en tu navegador para acortar/probar tus direcciones. (localhost:<port>/)
