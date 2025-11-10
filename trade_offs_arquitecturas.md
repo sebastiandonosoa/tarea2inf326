@@ -15,6 +15,25 @@ Respecto a las desventajas:
 3. Al no contar con réplicas de la base de datos, una caida del servidor provocaría una interrupción total del servicio. Generando problemas de disponibilidad.
 4. Debido al alto costo computacional, será necesario invertir más en recursos de cómputos, lo que podría afectar la viabilidad económica de la arquitectura.
 
+# Arquitectura 2
+
+## Trade-offs 
+
+La arquitectura 2 presenta las siguientes ventajas:
+
+1. Una rápida ejecución de la API, con un simple comando se habilitan los endpoints, además de que hay un bajo consumo de recursos.
+2. Una persistencia del url_short en el navegador para un rápido acceso a la página web, usando cookies que perduran un dia.
+3. Un acceso controlado de peticiones, siendo 15 por cada minuto, para evitar colapsar la API con peticiones HTTP.
+4. Una baja probabilidad de que se repita el hash para cada una de las url creadas, evitando colisiones entre los distintos hash que solicitan los usuarios, favoreciendo el correcto funcionamiento del acortador.
+5. Usando sqlite, se permite no tener una base de datos ejecutandose por detrás de la arquitectura, sino que se usa solo un archivo para guardar los acortadores creados.
+
+Respecto a las desventajas:
+
+1. No se tiene una interfaz, por lo que solo se puede acceder a los Endpoints en base a peticiones HTTP.
+2. Solo se guardan los url_long y sus hash en un archivo, si este se eliminara, no existe respaldo. Se tiene una baja disponibilidad al solo tener un acceso.
+3. Si se acumulan muchas url_short, dado que se guardan las cookies por un dia, se pueden acumular estas cookies en el navegador y acumular datos de navegación.
+4. Se debe enviar en el body la url_short, lo que hace más complejo el intercambio de información entre el usuario y la API, además no se pasa el url_short para obtener el url_long, sino que se pasa el hash, lo que puede ser un poco incomodo o se necesitaria otros Endpoint para que se pueda acceder solo usando los url_long y url_short en las peticiones. 
+
 ## Consideración respecto al dominio
 
 Si consideramos el dominio de la USM (según lo indicado en el enunciado de la tarea), resulta conveniente que la universidad (o empresa que contrate los servicios de nuestra url shortener) pueda conocer los sitios más visitados por el público. Esta información puede reflejar tendencias de interés, como carreras más visitadas, o el aréa de interés de los alumnos, y servir de apoyo en estrategias de marketing o toma de decisiones institucionales.
